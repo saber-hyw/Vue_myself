@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>example</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div id="Id_1">
+       <p>{{message}}</p>
+       <button v-on:click="reverseMessage">逆转消息</button> 
+    </div>
+    <div id="Id_2">
+        <ol>
+            <todo-item 
+            v-for= "item in groceryList"
+            v-bind:todo= "item"
+            v-bind:key= "item.id" 
+            >
+            </todo-item>
+        </ol>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <!-- 或是直接加载本地的vue.js -->
+    <!--<script type="text/javascript" src="vue.js" ></script>-->
+    <script type="text/javascript">
+        // 备注：下面的代码由于需要找到 id=app1的选择器，因此放在head标签里面会报错（找不到el: '#app1'）
+        var app = new Vue({
+            el: '#Id_1',
+            data: {
+                message: 'Hello Vue!'
+            },
+            created: function () {
+                console.log("when the object by vue is created,program execution");
+            },
+            methods: {
+                reverseMessage: function() {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        });
+        // 定义名为todo-item的新组件；
+        Vue.component('todo-item',{
+            // todo-item 组件现在接受一个，“prop”，类似一个自定义特性，这个Prop名为todo；
+            props: ['todo'],
+            template: '<li>{{todo.text}}</li>'
+        });
+        var app1 = new Vue({
+            el:'#Id_2',
+            data:{
+                groceryList:[
+                    {id:0, text:'蔬菜'},
+                    {id:1, text:'奶酪'},
+                    {id:2, text:'其他随便'}
+                ]
+            }
+        });
+    </script>
+</body>
+</html>
