@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vue example</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div id="todolist">
+       <h1 v-text="title"></h1>
+       <ul>
+           <li v-for="item in Items">
+               {{item.lable}}
+           </li>
+       </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <!-- 或是直接加载本地的vue.js -->
+    <!--<script type="text/javascript" src="vue.js" ></script>-->
+    <script type="text/javascript">
+        // 备注：下面的代码由于需要找到 id=app1的选择器，因此放在head标签里面会报错（找不到el: '#app1'）
+        var app = new Vue({
+            el: '#todolist',
+            data: function() {
+                return {
+                    title: "this is a todo list",
+                    Items:[
+                        {
+                            lable: 'coding',
+                            isFinished: false
+                        },
+                        {
+                            lable: 'walking',
+                            isFinished: true
+                        }
+                    ]
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

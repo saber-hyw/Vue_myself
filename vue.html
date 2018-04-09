@@ -9,6 +9,7 @@
        <p>{{message}}</p>
        <button v-on:click="reverseMessage">逆转消息</button> 
     </div>
+
     <div id="Id_2">
         <ol>
             <todo-item 
@@ -19,6 +20,12 @@
             </todo-item>
         </ol>
     </div>
+
+    <div id="Id_3">
+        <p>{{messag_1}}</p>
+        <button v-on:click="todoMessage">++</button>
+    </div>
+
     <script src="https://unpkg.com/vue"></script>
     <!-- 或是直接加载本地的vue.js -->
     <!--<script type="text/javascript" src="vue.js" ></script>-->
@@ -54,6 +61,24 @@
                 ]
             }
         });
+        
+        var app2 = new Vue({
+            el:'#Id_3',
+            data: {
+                messag_1: 1
+            },
+            methods: {
+                todoMessage: function(){
+                    this.messag_1 ++;
+                }
+            },
+            // watch: {
+            //     'message_1': function(val) {
+            //         console.log(val);
+            //     }
+            // }
+        });
+
     </script>
 </body>
 </html>
