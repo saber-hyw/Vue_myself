@@ -3,12 +3,25 @@
 <head>
     <title>Vue example</title>
     <meta charset="utf-8" />
+    <style>
+    .finished{
+        text-decoration: underline;
+    }
+    #todolist {
+        text-align: center;
+        /* margin: 0 auto; */
+    }
+    /* #ulList {
+        text-align: left;
+    } */
+    </style>
 </head>
 <body>
     <div id="todolist">
        <h1 v-text="title"></h1>
+        <input v-model="newItem" v-on:keyup.enter="addNew"></input>
        <ul>
-           <li v-for="item in Items">
+           <li v-for="item in Items"  v-bind:class="{finished: item.isFinished}" v-on:click="toggleFinish(item)">
                {{item.lable}}
            </li>
        </ul>
@@ -23,17 +36,32 @@
             el: '#todolist',
             data: function() {
                 return {
-                    title: "this is a todo list",
+                    title: "this is todo list",
+                    // 以下是静态的数组，仅实验用；
                     Items:[
-                        {
-                            lable: 'coding',
-                            isFinished: false
-                        },
-                        {
-                            lable: 'walking',
-                            isFinished: true
-                        }
-                    ]
+                        // {
+                        //     lable: 'coding',
+                        //     isFinished: true
+                        // },
+                        // {
+                        //     lable: 'walking',
+                        //     isFinished: true
+                        // }
+                    ],
+                    newItem: ''
+                }
+            },
+            methods:{
+                toggleFinish: function(item) {
+                    item.isFinished = !item.isFinished;    //取反
+                },
+                addNew: function() {
+                    console.log(this.newItem);// 打印
+                    this.Items.push({
+                        lable: this.newItem,
+                        isFinished: false
+                    });
+                    this.newItem = '';
                 }
             }
         });
